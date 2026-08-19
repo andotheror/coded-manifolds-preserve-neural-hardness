@@ -45,20 +45,11 @@ The construction replaces coordinate repetition by coding. We traverse a reflect
 
 The manifold hypothesis is often invoked to explain why learning in a high-dimensional ambient space can avoid the curse of dimensionality. If data lie on a low-dimensional regular manifold, then sample complexity may depend primarily on intrinsic dimension and geometric condition numbers. This principle underlies manifold reconstruction, geometric inference, and many analyses of learning on structured data \citep{narayanan2010sample,fefferman2016testing,niyogi2008homology}.
 
-Low intrinsic dimension and low curvature alone do not guarantee efficient learning. \citet{kiani2024manifold} constructed one-dimensional manifolds in the Boolean cube on which learning shallow ReLU networks is exponentially hard. Their curves follow a reflected Gray code and repeat every Boolean coordinate enough times to obtain a prescribed reach. If the reach is $R$, this repetition uses $\Theta(R^2)$ ambient coordinates per independent Boolean bit. It leaves $\Theta(n/R^2)$ hard bits and therefore proves exponential hardness whenever
-\[
-R=O(n^\alpha),\qquad \alpha<\frac12.
-\]
-The same work proves a complementary geometric fact. For fixed intrinsic dimension, a manifold in $[0,1]^n$ with reach $\omega(\sqrt n)$ has polynomial volume and is efficiently covered by samples. A simple interpolation argument then learns bounded-Lipschitz networks. The authors explicitly leave reach $\Theta(\sqrt n)$ open.
+Low intrinsic dimension and low curvature alone do not guarantee efficient learning. \citet{kiani2024manifold} constructed one-dimensional manifolds in the Boolean cube on which learning shallow ReLU networks is exponentially hard. Their curves follow a reflected Gray code and repeat every Boolean coordinate enough times to obtain a prescribed reach. If the reach is $R$, this repetition uses $\Theta(R^2)$ ambient coordinates per independent Boolean bit. It leaves $\Theta(n/R^2)$ hard bits and therefore proves exponential hardness whenever \[ R=O(n^\alpha),\qquad \alpha<\frac12. \] The same work proves a complementary geometric fact. For fixed intrinsic dimension, a manifold in $[0,1]^n$ with reach $\omega(\sqrt n)$ has polynomial volume and is efficiently covered by samples. A simple interpolation argument then learns bounded-Lipschitz networks. The authors explicitly leave reach $\Theta(\sqrt n)$ open.
 
 At this boundary, coordinate repetition fails completely. It leaves only $O(1)$ independent bits. A different geometry is necessary. Our key observation is that repetition enforces separation coordinate by coordinate, while reach only asks that a small family of geometric vectors be separated in Euclidean norm. A small-bias code can enforce the latter simultaneously for exponentially many local configurations using only linearly many coordinates.
 
-We first form a smooth abstract curve through the orthogonal vertices $\{e_z:z\in\Ftwo^m\}\subset\R^{2^m}$ in reflected Gray order. Every point, tangent, and local derivative is supported on at most three adjacent messages. We then map $e_z$ to a systematic codeword
-\[
-C(z)=\bigl(z,\mathbf1\{\langle R_1,z\rangle=1\},\ldots,
-\mathbf1\{\langle R_N,z\rangle=1\}\bigr),
-\]
-where $R_1,\ldots,R_N$ form a constant-bias multiset in $\Ftwo^m$. Such multisets of linear size have deterministic polynomial-time constructions \citep{naor1993smallbias,tashma2017balanced}. For a uniform character $R$ and any real signed measure $w=(w_z)$ of total mass zero, character orthogonality gives
+We first form a smooth abstract curve through the orthogonal vertices $\{e_z:z\in\Ftwo^m\}\subset\R^{2^m}$ in reflected Gray order. Every point, tangent, and local derivative is supported on at most three adjacent messages. We then map $e_z$ to a systematic codeword \[ C(z)=\bigl(z,\mathbf1\{\langle R_1,z\rangle=1\},\ldots, \mathbf1\{\langle R_N,z\rangle=1\}\bigr), \] where $R_1,\ldots,R_N$ form a constant-bias multiset in $\Ftwo^m$. Such multisets of linear size have deterministic polynomial-time constructions \citep{naor1993smallbias,tashma2017balanced}. For a uniform character $R$ and any real signed measure $w=(w_z)$ of total mass zero, character orthogonality gives
 \begin{equation}
 \mathbb E_R\left(\sum_z w_z\mathbf1\{\langle R,z\rangle=1\}\right)^2
 =\frac14\sum_z w_z^2.
@@ -120,10 +111,7 @@ There are universal constants $c,C,\rho,\tau_0>0$ and, for every sufficiently la
 \item $\cD_n$ has full support. Its density relative to normalized arclength lies in $[c,C]$, and it is samplable to $b$ bits of precision in time polynomial in $n+b$.
 \item Every member of $\cH_n$ has width at most $Cn$, output in $[-1,1]$ on $M_n$, and weights and biases bounded by $Cn$.
 \item For every $0<\tau\leq\tau_0$, an SQ learner that, with success probability at least $2/3$, learns every $h\in\cH_n$ from the noise-free distribution $(X,h(X))$, $X\sim\cD_n$, to squared error at most $1/16$ needs at least
-\[
-c\tau^2\exp(\rho n)
-\]
-queries of tolerance $\tau$.
+\[ c\tau^2\exp(\rho n) \] queries of tolerance $\tau$.
 \end{enumerate}
 \end{theorem}
 
@@ -143,11 +131,7 @@ Fix a sufficiently small constant $r>0$, let $m=\lfloor rn\rfloor$, $N=n-m$, and
 
 \subsection{The abstract sparse curve}
 
-Let $e_z\in\R^K$ be the basis vector indexed by $z\in\Ftwo^m$. Start from the closed polygon that visits $e_{z_0},\ldots,e_{z_{K-1}}$ in Gray order. Truncate a fixed fraction of every edge and replace every corner by the same smooth planar rounding inside
-\[
-\operatorname{conv}\{e_{z_{i-1}},e_{z_i},e_{z_{i+1}}\}.
-\]
-The rounding agrees with both adjacent straight segments to every derivative order. Appendix~\ref{app:abstract} gives an explicit tangent-angle construction.
+Let $e_z\in\R^K$ be the basis vector indexed by $z\in\Ftwo^m$. Start from the closed polygon that visits $e_{z_0},\ldots,e_{z_{K-1}}$ in Gray order. Truncate a fixed fraction of every edge and replace every corner by the same smooth planar rounding inside \[ \operatorname{conv}\{e_{z_{i-1}},e_{z_i},e_{z_{i+1}}\}. \] The rounding agrees with both adjacent straight segments to every derivative order. Appendix~\ref{app:abstract} gives an explicit tangent-angle construction.
 
 \begin{lemma}[Sparse smooth Gray curve]
 \label{lem:abstract}
@@ -158,12 +142,7 @@ The dimension-free reach is a consequence of sparsity. Points on nonlocal pieces
 
 \subsection{Systematic small-bias code}
 
-Fix a sufficiently small constant $\varepsilon_0>0$. An $\varepsilon_0$-biased multiset $\mathcal R\subset\Ftwo^m$ satisfies
-\[
-\left|\frac1{|\mathcal R|}\sum_{R\in\mathcal R}(-1)^{\langle R,a\rangle}\right|\leq\varepsilon_0
-\qquad\text{for every }a\ne0.
-\]
-Explicit constructions have $|\mathcal R|=O_{\varepsilon_0}(m)$ and are computable in polynomial time \citep{naor1993smallbias,tashma2017balanced}. Choose $r$ small enough that $N=n-m$ contains at least $1/\varepsilon_0$ full copies of such a multiset. Form $R_1,\ldots,R_N$ by repeating full copies and truncating one final copy. The resulting multiset has bias at most $\varepsilon=2\varepsilon_0$. Define the binary codeword
+Fix a sufficiently small constant $\varepsilon_0>0$. An $\varepsilon_0$-biased multiset $\mathcal R\subset\Ftwo^m$ satisfies \[ \left|\frac1{|\mathcal R|}\sum_{R\in\mathcal R}(-1)^{\langle R,a\rangle}\right|\leq\varepsilon_0 \qquad\text{for every }a\ne0. \] Explicit constructions have $|\mathcal R|=O_{\varepsilon_0}(m)$ and are computable in polynomial time \citep{naor1993smallbias,tashma2017balanced}. Choose $r$ small enough that $N=n-m$ contains at least $1/\varepsilon_0$ full copies of such a multiset. Form $R_1,\ldots,R_N$ by repeating full copies and truncating one final copy. The resulting multiset has bias at most $\varepsilon=2\varepsilon_0$. Define the binary codeword
 \begin{equation}
 C(z)=\left(z_1,\ldots,z_m,
 \mathbf1\{\langle R_1,z\rangle=1\},\ldots,
@@ -188,30 +167,15 @@ c_sN\|w\|_2^2\leq\|Fw\|_2^2\leq C_sN\|w\|_2^2.
 \end{equation}
 \end{lemma}
 
-For the parity block, expand the squared norm and use small bias on every nonzero difference $z+z'$. The diagonal contribution is exactly $N\|w\|_2^2/4$, while the absolute off-diagonal contribution is at most
-\[
-\frac{\varepsilon N}{4}\sum_{z\ne z'}|w_zw_{z'}|
-\leq\frac{\varepsilon N(s-1)}4\|w\|_2^2.
-\]
-Choosing $\varepsilon\leq1/(2(s-1))$ gives constant lower and upper bounds without a net or union bound. The systematic coordinates add a nonnegative quadratic form and at most $ms\|w\|_2^2$. Choosing $r$ small enough makes $N\geq C_sm$. Appendix~\ref{app:rip} gives the details, including the harmless truncation of the last copy.
+For the parity block, expand the squared norm and use small bias on every nonzero difference $z+z'$. The diagonal contribution is exactly $N\|w\|_2^2/4$, while the absolute off-diagonal contribution is at most \[ \frac{\varepsilon N}{4}\sum_{z\ne z'}|w_zw_{z'}| \leq\frac{\varepsilon N(s-1)}4\|w\|_2^2. \] Choosing $\varepsilon\leq1/(2(s-1))$ gives constant lower and upper bounds without a net or union bound. The systematic coordinates add a nonnegative quadratic form and at most $ms\|w\|_2^2$. Choosing $r$ small enough makes $N\geq C_sm$. Appendix~\ref{app:rip} gives the details, including the harmless truncation of the last copy.
 
 \begin{proposition}[Critical reach]
 \label{prop:reach}
-For the code in Lemma~\ref{lem:rip} with $s=12$, the curve $M_n$ is a closed $C^\infty$ embedding and
-\[
-c\sqrt n\leq\reach(M_n)\leq\sqrt n.
-\]
+For the code in Lemma~\ref{lem:rip} with $s=12$, the curve $M_n$ is a closed $C^\infty$ embedding and \[ c\sqrt n\leq\reach(M_n)\leq\sqrt n. \]
 \end{proposition}
 
 \begin{proof}[Proof sketch]
-Let $p,q\in\Gamma_m$, let $w=q-p$, and let $v$ span the tangent at $p$. The vectors $w$ and $w-tv$ have total mass zero and constant support for every $t\in\R$. Lemma~\ref{lem:rip} gives
-\[
-\|Fw\|_2^2\geq cN\|w\|_2^2,
-\qquad
-\dist(Fw,\operatorname{span}Fv)
-\leq C\sqrt N\dist(w,\operatorname{span}v).
-\]
-Substitution into \eqref{eq:federer} and Lemma~\ref{lem:abstract} give $\reach(M_n)\geq c\sqrt N=\Omega(\sqrt n)$. The same lower inequality makes $T$ injective on the curve and regular on every tangent.
+Let $p,q\in\Gamma_m$, let $w=q-p$, and let $v$ span the tangent at $p$. The vectors $w$ and $w-tv$ have total mass zero and constant support for every $t\in\R$. Lemma~\ref{lem:rip} gives \[ \|Fw\|_2^2\geq cN\|w\|_2^2, \qquad \dist(Fw,\operatorname{span}Fv) \leq C\sqrt N\dist(w,\operatorname{span}v). \] Substitution into \eqref{eq:federer} and Lemma~\ref{lem:abstract} give $\reach(M_n)\geq c\sqrt N=\Omega(\sqrt n)$. The same lower inequality makes $T$ injective on the curve and regular on every tangent.
 
 For the upper bound, suppose the reach exceeded the diameter. Nearest-point projection would continuously retract the convex hull onto the curve. The induced identity on the curve's nonzero first homology would then factor through the zero first homology of its convex hull, a contradiction. Thus $\reach(M_n)\leq\operatorname{diam}(M_n)\leq\sqrt n$.
 \end{proof}
@@ -229,12 +193,7 @@ Let $d=\lfloor m/2\rfloor$ and $t=m-d$. In a reflected Gray ordering, the first 
 
 \begin{lemma}[Uniform decoded prefixes]
 \label{lem:gray}
-For $X\sim\cD_n$, the probability that $X$ lies on a bad piece is $O(2^{-t})$. Conditioned on the piece type and on being good, the normalized prefix
-\[
-Z(X)=\left(\frac{X_1-a}{1-2a},\ldots,
-\frac{X_d-a}{1-2a}\right)
-\]
-is exactly uniform on $\{0,1\}^d$.
+For $X\sim\cD_n$, the probability that $X$ lies on a bad piece is $O(2^{-t})$. Conditioned on the piece type and on being good, the normalized prefix \[ Z(X)=\left(\frac{X_1-a}{1-2a},\ldots, \frac{X_d-a}{1-2a}\right) \] is exactly uniform on $\{0,1\}^d$.
 \end{lemma}
 
 The exact uniformity follows because every high-prefix block has the same length and loses the same number of local indices at its boundaries. This is stronger than merely bounding the mass of each code neighborhood.
@@ -271,12 +230,7 @@ The family $\cH_n=\{h_S:S\in\Ftwo^d\}$ is $(1-\eta_n)$-pairwise sign independent
 \end{lemma}
 
 \begin{proof}
-The probability that either draw is bad is $O(2^{-t})$. Conditioned on two good draws, their decoded prefixes are independent and uniform by Lemma~\ref{lem:gray}. Two vectors in $\Ftwo^d$ fail to be linearly independent only if one is zero or they are equal, an event of probability at most $3\cdot2^{-d}$. Otherwise the map
-\[
-S\longmapsto
-(\langle S,Z(X)\rangle,\langle S,Z(X')\rangle)
-\]
-has rank two and is uniform on $\Ftwo^2$. Equation~\eqref{eq:parity} finishes the proof. Since $d,t=\Omega(n)$, the failure probability is exponentially small.
+The probability that either draw is bad is $O(2^{-t})$. Conditioned on two good draws, their decoded prefixes are independent and uniform by Lemma~\ref{lem:gray}. Two vectors in $\Ftwo^d$ fail to be linearly independent only if one is zero or they are equal, an event of probability at most $3\cdot2^{-d}$. Otherwise the map \[ S\longmapsto (\langle S,Z(X)\rangle,\langle S,Z(X')\rangle) \] has rank two and is uniform on $\Ftwo^2$. Equation~\eqref{eq:parity} finishes the proof. Since $d,t=\Omega(n)$, the failure probability is exponentially small.
 \end{proof}
 
 The full-SQ consequence is immediate but worth stating separately. The result is stronger than an orthogonality or correlational-SQ argument because the query may depend arbitrarily on both $x$ and $y$.
@@ -286,11 +240,7 @@ The full-SQ consequence is immediate but worth stating separately. The result is
 Let $\cH$ be $(1-\eta)$-pairwise sign independent under $D$. Distinguishing an unknown deterministic labeled law $(X,h(X))$, $h\in\cH$, from the random-function mixture requires at least $\tau^2/(2\eta)$ bounded SQ queries of tolerance $\tau$ for a deterministic distinguisher. A randomized distinguisher with constant success probability requires $\Omega(\tau^2/\eta)$ queries.
 \end{lemma}
 
-The random-function mixture first draws $X\sim D$ and then draws a fresh uniform $h\in\cH$ to set the label $h(X)$. For completeness, if $\phi[h]=\mathbb E_X\phi(X,h(X))$, the same calculation as in Lemma C.3 of \citet{chen2022noisefree} gives
-\[
-\operatorname{Var}_{h\sim\operatorname{Unif}(\cH)}\phi[h]\leq2\eta.
-\]
-Indeed, expand the variance using two inputs and compare a common uniform $h$ with independent uniform $h,h'$. The two joint label laws agree on every nonexceptional input pair, even though labels on exceptional pairs need not be signs. The integrand is bounded by two elsewhere. An oracle can therefore answer every query by the mixture expectation. Chebyshev's inequality shows that one query excludes at most a $2\eta/\tau^2$ fraction of targets. The deterministic claim follows by a union bound over the resulting query path. Averaging over the target and the internal coins gives the randomized claim with a universal constant loss.
+The random-function mixture first draws $X\sim D$ and then draws a fresh uniform $h\in\cH$ to set the label $h(X)$. For completeness, if $\phi[h]=\mathbb E_X\phi(X,h(X))$, the same calculation as in Lemma C.3 of \citet{chen2022noisefree} gives \[ \operatorname{Var}_{h\sim\operatorname{Unif}(\cH)}\phi[h]\leq2\eta. \] Indeed, expand the variance using two inputs and compare a common uniform $h$ with independent uniform $h,h'$. The two joint label laws agree on every nonexceptional input pair, even though labels on exceptional pairs need not be signs. The integrand is bounded by two elsewhere. An oracle can therefore answer every query by the mixture expectation. Chebyshev's inequality shows that one query excludes at most a $2\eta/\tau^2$ fraction of targets. The deterministic claim follows by a union bound over the resulting query path. Averaging over the target and the internal coins gives the randomized claim with a universal constant loss.
 
 \begin{proof}[Proof of Theorem~\ref{thm:main}]
 Proposition~\ref{prop:reach} gives the geometric claim. The speed bounds above give all distributional claims. Equation~\eqref{eq:parity-network} gives the stated architecture.
@@ -333,55 +283,18 @@ We prove Lemma~\ref{lem:abstract}. The only purpose of this appendix is to make 
 
 Fix $0<\alpha<1/10$. Truncate every polygon edge at Euclidean distance $\alpha$ from each endpoint. At a vertex $e_i$, let $u=(e_i-e_{i-1})/\sqrt2$ and $v=(e_{i+1}-e_i)/\sqrt2$ be the incoming and outgoing unit tangents. They satisfy $\langle u,v\rangle=-1/2$, so their turning angle is $\theta=2\pi/3$.
 
-For a sufficiently small fixed rational $\delta>0$, let
-\[
-b_\delta(s)=Z_\delta^{-1}\exp\left(-\frac{\delta}{s(1-s)}\right),\qquad 0<s<1,
-\]
-and set it to zero at the endpoints, where $Z_\delta$ normalizes its integral to one. This is a positive symmetric $C^\infty$ function that is flat at zero and one. As $\delta\downarrow0$, it converges to the constant function one on compact subintervals of $(0,1)$. Write $b=b_\delta$. For a length $L>0$, define
-\[
-\beta(s)=\theta\int_0^{s/L}b(r)\,dr,
-\qquad 0\leq s\leq L.
-\]
-Let $U(\varphi)$ be the unit vector obtained by rotating $u$ through angle $\varphi$ in the plane spanned by the three local basis vectors, and put
-\[
-\gamma(s)=p+\int_0^sU(\beta(q))\,dq.
-\]
-Symmetry gives $U(\beta(s))+U(\beta(L-s))$ parallel to $u+v$. Hence $\gamma(L)-\gamma(0)=c_bL(u+v)$ for a constant $c_b>0$. Choosing $L=\alpha/c_b$ makes the endpoints equal to the two truncated polygon points. For $b\equiv1$, the formula is the circular arc tangent to both edges and lying in the local triangle. Positive smooth flat approximations preserve the two inward-pointing endpoint jets and converge to this circular arc away from the endpoints. Choosing one sufficiently close approximation therefore keeps the open arc in the triangle. This template and all its constants are fixed once and for all.
+For a sufficiently small fixed rational $\delta>0$, let \[ b_\delta(s)=Z_\delta^{-1}\exp\left(-\frac{\delta}{s(1-s)}\right),\qquad 0<s<1, \] and set it to zero at the endpoints, where $Z_\delta$ normalizes its integral to one. This is a positive symmetric $C^\infty$ function that is flat at zero and one. As $\delta\downarrow0$, it converges to the constant function one on compact subintervals of $(0,1)$. Write $b=b_\delta$. For a length $L>0$, define \[ \beta(s)=\theta\int_0^{s/L}b(r)\,dr, \qquad 0\leq s\leq L. \] Let $U(\varphi)$ be the unit vector obtained by rotating $u$ through angle $\varphi$ in the plane spanned by the three local basis vectors, and put \[ \gamma(s)=p+\int_0^sU(\beta(q))\,dq. \] Symmetry gives $U(\beta(s))+U(\beta(L-s))$ parallel to $u+v$. Hence $\gamma(L)-\gamma(0)=c_bL(u+v)$ for a constant $c_b>0$. Choosing $L=\alpha/c_b$ makes the endpoints equal to the two truncated polygon points. For $b\equiv1$, the formula is the circular arc tangent to both edges and lying in the local triangle. Positive smooth flat approximations preserve the two inward-pointing endpoint jets and converge to this circular arc away from the endpoints. Choosing one sufficiently close approximation therefore keeps the open arc in the triangle. This template and all its constants are fixed once and for all.
 
 The arc has unit speed. Its curvature is $\beta'(s)=\theta b(s/L)/L$, which is uniformly bounded because $L$ is fixed. Every derivative of curvature vanishes at the endpoints. It therefore joins the straight segments to all orders. The resulting cyclic curve is $C^\infty$, and every point is a convex combination of at most three adjacent basis vectors.
 
 To prove a uniform reach bound, classify pairs of local pieces by cyclic index distance. If their three-vertex supports are disjoint, each point is a probability vector with norm at least $1/\sqrt3$, so their distance is at least $\sqrt{2/3}$. If supports overlap, there are only finitely many relative configurations, each congruent to a fixed compact template. Embeddedness of the rounded orthogonal polygon gives positive separation away from the diagonal.
 
-Near the diagonal, let $\gamma$ be any local unit-speed parametrization and let $\kappa_0$ bound curvature. Taylor's theorem gives, for small $|h|$,
-\[
-\dist(\gamma(s+h)-\gamma(s),\operatorname{span}\gamma'(s))
-\leq\frac{\kappa_0}{2}h^2,
-\qquad
-\|\gamma(s+h)-\gamma(s)\|\geq\frac{|h|}{2}.
-\]
-The quotient in \eqref{eq:federer} is therefore bounded below by a positive constant near the diagonal. Compactness handles every remaining local pair. The minimum of these finitely many constants and the disjoint-support bound is $r_0>0$.
+Near the diagonal, let $\gamma$ be any local unit-speed parametrization and let $\kappa_0$ bound curvature. Taylor's theorem gives, for small $|h|$, \[ \dist(\gamma(s+h)-\gamma(s),\operatorname{span}\gamma'(s)) \leq\frac{\kappa_0}{2}h^2, \qquad \|\gamma(s+h)-\gamma(s)\|\geq\frac{|h|}{2}. \] The quotient in \eqref{eq:federer} is therefore bounded below by a positive constant near the diagonal. Compactness handles every remaining local pair. The minimum of these finitely many constants and the disjoint-support bound is $r_0>0$.
 
 \section{Small-bias character isometry}
 \label{app:rip}
 
-We prove Lemma~\ref{lem:rip}. Let $\mathcal R_0\subset\Ftwo^m$ be an explicit $\varepsilon_0$-biased multiset of size $N_0\leq C_{\varepsilon_0}m$ \citep{naor1993smallbias,tashma2017balanced}. Let $q=\lfloor N/N_0\rfloor$. By taking $r$ sufficiently small, $q\geq1/\varepsilon_0$. Repeat $\mathcal R_0$ exactly $q$ times and append any $N-qN_0<N_0$ elements of one further copy. For every $a\ne0$, the resulting empirical character average has absolute value at most
-\[
-\frac{qN_0\varepsilon_0+(N-qN_0)}N\leq\varepsilon_0+\frac1q\leq2\varepsilon_0.
-\]
-Write $\varepsilon=2\varepsilon_0$ for this final bias. Let $A\in\{0,1\}^{N\times K}$ be the parity part of $F$, so
-\[
-A_{\ell,z}=\mathbf1\{\langle R_\ell,z\rangle=1\}.
-\]
-For $\chi_R(z)=(-1)^{\langle R,z\rangle}$,
-\[
-\mathbf1\{\langle R,z\rangle=1\}=\frac{1-\chi_R(z)}2.
-\]
-If $\sum_z w_z=0$, then
-\[
-\sum_z w_z\mathbf1\{\langle R,z\rangle=1\}
-=-\frac12\sum_z w_z\chi_R(z).
-\]
-For a zero-mass vector $w$, expansion over the empirical law of the $R_\ell$ gives
+We prove Lemma~\ref{lem:rip}. Let $\mathcal R_0\subset\Ftwo^m$ be an explicit $\varepsilon_0$-biased multiset of size $N_0\leq C_{\varepsilon_0}m$ \citep{naor1993smallbias,tashma2017balanced}. Let $q=\lfloor N/N_0\rfloor$. By taking $r$ sufficiently small, $q\geq1/\varepsilon_0$. Repeat $\mathcal R_0$ exactly $q$ times and append any $N-qN_0<N_0$ elements of one further copy. For every $a\ne0$, the resulting empirical character average has absolute value at most \[ \frac{qN_0\varepsilon_0+(N-qN_0)}N\leq\varepsilon_0+\frac1q\leq2\varepsilon_0. \] Write $\varepsilon=2\varepsilon_0$ for this final bias. Let $A\in\{0,1\}^{N\times K}$ be the parity part of $F$, so \[ A_{\ell,z}=\mathbf1\{\langle R_\ell,z\rangle=1\}. \] For $\chi_R(z)=(-1)^{\langle R,z\rangle}$, \[ \mathbf1\{\langle R,z\rangle=1\}=\frac{1-\chi_R(z)}2. \] If $\sum_z w_z=0$, then \[ \sum_z w_z\mathbf1\{\langle R,z\rangle=1\} =-\frac12\sum_z w_z\chi_R(z). \] For a zero-mass vector $w$, expansion over the empirical law of the $R_\ell$ gives
 \begin{align}
 \frac1N\|Aw\|_2^2
 &=\frac1{4N}\sum_{\ell=1}^N\left(\sum_z w_z\chi_{R_\ell}(z)\right)^2 \notag\\
@@ -390,97 +303,43 @@ For a zero-mass vector $w$, expansion over the empirical law of the $R_\ell$ giv
 \left(\frac1N\sum_{\ell=1}^N\chi_{R_\ell}(z+z')\right).
 \label{eq:small-bias-expansion}
 \end{align}
-Every $z+z'$ in the second sum is nonzero. If $w$ has support at most $s$, small bias and Cauchy--Schwarz give
-\[
-\left|\frac1N\|Aw\|_2^2-\frac14\|w\|_2^2\right|
-\leq\frac\varepsilon4\sum_{z\ne z'}|w_zw_{z'}|
-\leq\frac{\varepsilon(s-1)}4\|w\|_2^2.
-\]
-Choose $\varepsilon\leq1/(2(s-1))$. Then, simultaneously for every such $w$,
+Every $z+z'$ in the second sum is nonzero. If $w$ has support at most $s$, small bias and Cauchy--Schwarz give \[ \left|\frac1N\|Aw\|_2^2-\frac14\|w\|_2^2\right| \leq\frac\varepsilon4\sum_{z\ne z'}|w_zw_{z'}| \leq\frac{\varepsilon(s-1)}4\|w\|_2^2. \] Choose $\varepsilon\leq1/(2(s-1))$. Then, simultaneously for every such $w$,
 \begin{equation}
 \frac18N\|w\|_2^2\leq\|Aw\|_2^2\leq\frac38N\|w\|_2^2.
 \label{eq:parity-rip}
 \end{equation}
 
-It remains to add the systematic part. Let $B\in\{0,1\}^{m\times K}$ have column $z$ at index $z$. For every $s$-sparse $w$,
-\[
-|(Bw)_j|\leq\|w\|_1\leq\sqrt s\|w\|_2,
-\qquad
-\|Bw\|_2^2\leq ms\|w\|_2^2.
-\]
-Since $F=(B,A)$, the lower bound in \eqref{eq:parity-rip} remains valid and the systematic part changes only the upper constant when $m=O(N)$. This proves \eqref{eq:rip}.
+It remains to add the systematic part. Let $B\in\{0,1\}^{m\times K}$ have column $z$ at index $z$. For every $s$-sparse $w$, \[ |(Bw)_j|\leq\|w\|_1\leq\sqrt s\|w\|_2, \qquad \|Bw\|_2^2\leq ms\|w\|_2^2. \] Since $F=(B,A)$, the lower bound in \eqref{eq:parity-rip} remains valid and the systematic part changes only the upper constant when $m=O(N)$. This proves \eqref{eq:rip}.
 
 \section{Reach transfer in detail}
 \label{app:reach}
 
-Let $q=1-2a=1/2$. The derivative of $T$ is $qF$. Fix distinct $p,u\in\Gamma_m$, let $w=u-p$, and let $v\ne0$ span $T_p\Gamma_m$. By Lemma~\ref{lem:abstract}, $w$ has support at most six and $v$ has support at most three. Both have coordinate sum zero, and every $w-\lambda v$ has support at most six. Lemma~\ref{lem:rip} yields constants $c_0,C_0>0$ such that
-\[
-\|qFw\|_2^2\geq c_0N\|w\|_2^2
-\]
-and
+Let $q=1-2a=1/2$. The derivative of $T$ is $qF$. Fix distinct $p,u\in\Gamma_m$, let $w=u-p$, and let $v\ne0$ span $T_p\Gamma_m$. By Lemma~\ref{lem:abstract}, $w$ has support at most six and $v$ has support at most three. Both have coordinate sum zero, and every $w-\lambda v$ has support at most six. Lemma~\ref{lem:rip} yields constants $c_0,C_0>0$ such that \[ \|qFw\|_2^2\geq c_0N\|w\|_2^2 \] and
 \begin{align*}
 \dist(qFw,\operatorname{span}(qFv))
 &=\inf_{\lambda\in\R}\|qF(w-\lambda v)\|_2\\
 &\leq C_0\sqrt N\inf_{\lambda\in\R}\|w-\lambda v\|_2\\
 &=C_0\sqrt N\dist(w,\operatorname{span}v).
 \end{align*}
-Consequently,
-\[
-\frac{\|T(u)-T(p)\|_2^2}
-{2\dist(T(u)-T(p),T_{T(p)}M_n)}
-\geq
-\frac{c_0}{C_0}\sqrt N
-\frac{\|u-p\|_2^2}{2\dist(u-p,T_p\Gamma_m)}.
-\]
-Taking the infimum and using \eqref{eq:federer} gives
-\[
-\reach(M_n)\geq\frac{c_0}{C_0}\sqrt N\reach(\Gamma_m)
-\geq c\sqrt n.
-\]
-The same restricted lower bound shows that distinct curve points have distinct images and nonzero tangents remain nonzero. Hence the image is a smooth embedding.
+Consequently, \[ \frac{\|T(u)-T(p)\|_2^2} {2\dist(T(u)-T(p),T_{T(p)}M_n)} \geq \frac{c_0}{C_0}\sqrt N \frac{\|u-p\|_2^2}{2\dist(u-p,T_p\Gamma_m)}. \] Taking the infimum and using \eqref{eq:federer} gives \[ \reach(M_n)\geq\frac{c_0}{C_0}\sqrt N\reach(\Gamma_m) \geq c\sqrt n. \] The same restricted lower bound shows that distinct curve points have distinct images and nonzero tangents remain nonzero. Hence the image is a smooth embedding.
 
 For completeness, suppose a compact set $M$ has reach greater than its diameter. Every point of $\operatorname{conv}(M)$ lies within $\operatorname{diam}(M)$ of $M$, so nearest-point projection is a continuous retraction from $\operatorname{conv}(M)$ to $M$. If $M$ is a closed embedded curve, the induced identity on $H_1(M)$ would then factor through $H_1(\operatorname{conv}(M))=0$, a contradiction. Therefore $\reach(M)\leq\operatorname{diam}(M)$. Applying this to $M_n\subset[0,1]^n$ gives the upper bound $\sqrt n$.
 
 \section{Gray counting and the input density}
 \label{app:gray}
 
-Write the reflected Gray word at index $i\in\{0,\ldots,2^m-1\}$ as
-\[
-G(i)=i\mathbin{\mathrm{xor}}(i\!\gg\!1).
-\]
-For $d+t=m$, the first $d$ bits of $G(i)$ are constant for $2^t$ consecutive indices. The sequence of these block values is itself a reflected Gray order on $d$ bits. This follows directly from the recursive reflection construction.
+Write the reflected Gray word at index $i\in\{0,\ldots,2^m-1\}$ as \[ G(i)=i\mathbin{\mathrm{xor}}(i\!\gg\!1). \] For $d+t=m$, the first $d$ bits of $G(i)$ are constant for $2^t$ consecutive indices. The sequence of these block values is itself a reflected Gray order on $d$ bits. This follows directly from the recursive reflection construction.
 
-There are $2^d$ cyclic blocks. A straight piece is bad only when it crosses a block boundary, so there are exactly $2^d$ bad straight indices. A corner piece can be bad only when its three-message window meets a boundary, so there are at most $2^{d+1}$ bad corner indices. With a uniform index and fixed type probabilities,
-\[
-\Pr(\text{bad})\leq C\frac{2^d}{2^m}=C2^{-t}.
-\]
-Every block loses the same number of indices for each fixed piece type. Conditional on that type and goodness, its prefix is therefore uniform on $\Ftwo^d$. Mixing the two types preserves uniformity and proves Lemma~\ref{lem:gray}.
+There are $2^d$ cyclic blocks. A straight piece is bad only when it crosses a block boundary, so there are exactly $2^d$ bad straight indices. A corner piece can be bad only when its three-message window meets a boundary, so there are at most $2^{d+1}$ bad corner indices. With a uniform index and fixed type probabilities, \[ \Pr(\text{bad})\leq C\frac{2^d}{2^m}=C2^{-t}. \] Every block loses the same number of indices for each fixed piece type. Conditional on that type and goodness, its prefix is therefore uniform on $\Ftwo^d$. Mixing the two types preserves uniformity and proves Lemma~\ref{lem:gray}.
 
-Let $s_j(u)$ denote the abstract parametrization of type $j\in\{\mathrm{straight},\mathrm{corner}\}$ and index $i$. Its speed lies in a universal interval $[c_0,C_0]$. Since its tangent has total mass zero and support at most three, Lemma~\ref{lem:rip} gives
-\[
-c\sqrt n\leq\|(T\circ s_j)'(u)\|_2\leq C\sqrt n.
-\]
-There are $2K$ parameter intervals, each selected with probability $1/(2K)$. The total image length is between $cK\sqrt n$ and $CK\sqrt n$. Dividing parameter density by speed and comparing with inverse total length shows that $d\cD_n/d\operatorname{UnifArc}$ lies between two universal positive constants.
+Let $s_j(u)$ denote the abstract parametrization of type $j\in\{\mathrm{straight},\mathrm{corner}\}$ and index $i$. Its speed lies in a universal interval $[c_0,C_0]$. Since its tangent has total mass zero and support at most three, Lemma~\ref{lem:rip} gives \[ c\sqrt n\leq\|(T\circ s_j)'(u)\|_2\leq C\sqrt n. \] There are $2K$ parameter intervals, each selected with probability $1/(2K)$. The total image length is between $cK\sqrt n$ and $CK\sqrt n$. Dividing parameter density by speed and comparing with inverse total length shows that $d\cD_n/d\operatorname{UnifArc}$ lies between two universal positive constants.
 
 \section{Pairwise independence and learning reduction}
 \label{app:sq}
 
-Let $E$ be the event that both independent draws lie on good pieces and their decoded prefixes are nonzero and distinct. Lemma~\ref{lem:gray} gives
-\[
-\Pr(E^c)\leq C2^{-t}+2\cdot2^{-d}+2^{-d}
-\leq\exp(-\rho n).
-\]
-Over $\Ftwo$, two nonzero vectors are linearly dependent exactly when they are equal. Thus, on $E$, the linear map from $S\in\Ftwo^d$ to its two parity bits has rank two. Uniform $S$ produces two independent uniform signs. This proves Lemma~\ref{lem:independence}.
+Let $E$ be the event that both independent draws lie on good pieces and their decoded prefixes are nonzero and distinct. Lemma~\ref{lem:gray} gives \[ \Pr(E^c)\leq C2^{-t}+2\cdot2^{-d}+2^{-d} \leq\exp(-\rho n). \] Over $\Ftwo$, two nonzero vectors are linearly dependent exactly when they are equal. Thus, on $E$, the linear map from $S\in\Ftwo^d$ to its two parity bits has rank two. Uniform $S$ produces two independent uniform signs. This proves Lemma~\ref{lem:independence}.
 
-We also spell out the final validation query. Let $\widehat h$ be the learner's output and clip it pointwise to $[-1,1]$. Query
-\[
-\phi(x,y)=\frac14(\widehat h(x)-y)^2\in[0,1].
-\]
-For a learned deterministic target, $\mathbb E\phi\leq1/64$. Under the random-function mixture, condition on a good input with a nonzero decoded prefix. Its label is an independent uniform sign, and
-\[
-\mathbb E_y(\widehat h(x)-y)^2=1+\widehat h(x)^2\geq1.
-\]
-Therefore the mixture expectation is at least $1/4-\exp(-\rho n)$. Any fixed $\tau_0<1/16$ separates the two cases for large $n$.
+We also spell out the final validation query. Let $\widehat h$ be the learner's output and clip it pointwise to $[-1,1]$. Query \[ \phi(x,y)=\frac14(\widehat h(x)-y)^2\in[0,1]. \] For a learned deterministic target, $\mathbb E\phi\leq1/64$. Under the random-function mixture, condition on a good input with a nonzero decoded prefix. Its label is an independent uniform sign, and \[ \mathbb E_y(\widehat h(x)-y)^2=1+\widehat h(x)^2\geq1. \] Therefore the mixture expectation is at least $1/4-\exp(-\rho n)$. Any fixed $\tau_0<1/16$ separates the two cases for large $n$.
 
 \section{Conditional LWR reduction}
 \label{app:lwr}
@@ -489,11 +348,7 @@ We use Corollary~5.3 of \citet{chen2022noisefree}: an efficient learner for poly
 
 Let $\cD_n^{\mathrm{good}}$ be $\cD_n$ conditioned on a good piece. Its total variation distance from $\cD_n$ is $\delta_n=\exp(-\Omega(n))$. A Boolean input $z\in\Ftwo^d$ can be lifted to $\cD_n^{\mathrm{good}}$ as follows. Invert the reflected Gray map on the high-prefix block $z$, choose the piece type according to its conditional probability, choose uniformly among its good indices in that block, and choose the natural parameter uniformly. By the equal block counts proved in Appendix~\ref{app:gray}, this generates exactly the conditional law. Gray inversion, code evaluation, and local curve evaluation are polynomial time.
 
-Take a hard Boolean-cube network $f$ from the LWR reduction and replace each input $z_j$ by
-\[
-y_j(x)=\frac{x_j-a}{1-2a}.
-\]
-This affine substitution does not change depth or width and increases weights and biases only polynomially. Call the resulting network $\widetilde f$. On every good piece, $\widetilde f(x)=f(Z(x))$.
+Take a hard Boolean-cube network $f$ from the LWR reduction and replace each input $z_j$ by \[ y_j(x)=\frac{x_j-a}{1-2a}. \] This affine substitution does not change depth or width and increases weights and biases only polynomially. Call the resulting network $\widetilde f$. On every good piece, $\widetilde f(x)=f(Z(x))$.
 
 Suppose a polynomial-time learner $L$ learned these networks under $\cD_n$. A transcript of $Q(n)$ examples from $\cD_n$ can be coupled to one from $\cD_n^{\mathrm{good}}$ with failure probability at most $Q(n)\delta_n=\exp(-\Omega(n))$. Run $L$ on lifted uniform Boolean examples. Given a Boolean test input $z$, draw a fresh good piece with decoded prefix $z$ and evaluate the hypothesis returned by $L$ there. The expected Boolean squared risk of this randomized predictor is exactly the hypothesis risk under $\cD_n^{\mathrm{good}}$, which is at most its risk under $\cD_n$ divided by $1-\delta_n$. Thus this procedure learns the Boolean LWR class to the constant accuracy excluded by Corollary~5.3 of \citet{chen2022noisefree}. This proves Corollary~\ref{cor:lwr}.
 
