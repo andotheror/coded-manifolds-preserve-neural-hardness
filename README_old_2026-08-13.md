@@ -18,7 +18,7 @@ The construction replaces coordinate repetition by coding. We traverse a reflect
 
 ## Keywords
 
-manifold hypothesis, hardness of learning, reach, data manifolds, neural networks, computational lower bounds
+coded, manifolds, preserve, neural, hardness, critical, reach, does, sufficiently
 
 ## Files
 
